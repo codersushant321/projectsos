@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>School Admin Monitoring Dashboard</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --bg-dark: #0f172a;
+            --card-bg: #1e293b;
+            --accent-green: #10b981;
+            --accent-red: #ef4444;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+        }
+
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            padding: 20px;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 2px solid #334155;
+            padding-bottom: 15px;
+            margin-bottom: 20px;
+        }
+
+        /* School Active Status Light Indicator */
+        .school-status-box {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.1rem;
+            font-weight: bold;
+        }
+
+        .status-light {
+            width: 14px;
+            height: 14px;
+            border-radius: 50%;
+            display: inline-block;
+            box-shadow: 0 0 10px rgba(0,0,0,0.5);
+        }
+
+        .status-on { background-color: var(--accent-green); box-shadow: 0 0 10px var(--accent-green); }
+        .status-off { background-color: var(--accent-red); box-shadow: 0 0 10px var(--accent-red); }
+
+        /* KPI Cards Grid */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+
+        .stat-card {
+            background-color: var(--card-bg);
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        .stat-card h3 { margin: 0; font-size: 2rem; color: #38bdf8; }
+        .stat-card p { margin: 5px 0 0 0; color: var(--text-muted); font-size: 0.9rem; }
+
+        /* Main Content Grid */
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 20px;
+        }
+
+        .card {
+            background-color: var(--card-bg);
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #334155;
+        }
+
+        th { background-color: #0f172a; color: #38bdf8; }
+
+        .badge-present { color: var(--accent-green); font-weight: bold; }
+        .badge-absent { color: var(--accent-red); font-weight: bold; }
+
+        .homework-item {
+            background-color: #0f172a;
+            padding: 12px;
+            border-radius: 6px;
+            margin-bottom: 10px;
+            border-left: 4px solid #f59e0b;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div>
+            <h1><i class="fa-solid fa-chart-line"></i> Admin Operations Monitor</h1>
+            <p style="color: var(--text-muted); margin: 0;">Real-Time Classroom & Attendance Overview</p>
+        </div>
+        <div class="school-status-box">
+            <span id="schoolStatusLight" class="status-light status-off"></span>
+            <span id="schoolStatusText">Checking Status...</span>
+        </div>
+    </header>
+
+    <!-- Top Summary Metrics -->
+    <div class="stats-grid">
+        <div class="stat-card">
+            <h3 id="statTotalStudents">0</h3>
+            <p>Total Enrolled Students</p>
+        </div>
+        <div class="stat-card">
+            <h3 id="statPresentStudents" style="color: var(--accent-green);">0</h3>
+            <p>Present Today</p>
+        </div>
+        <div class="stat-card">
+            <h3 id="statAbsentStudents" style="color: var(--accent-red);">0</h3>
+            <p>Absent Today</p>
+        </div>
+        <div class="stat-card">
+            <h3 id="statActivePeriod">Period --</h3>
+            <p>Current Time Slot</p>
+        </div>
+    </div>
+
+    <div class="dashboard-grid">
+        <!-- Left Section: Live Classes & Routines -->
+        <div>
+            <div class="card">
+                <h3><i class="fa-solid fa-chalkboard-user"></i> Active Teacher Assignments</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Class</th>
+                            <th>Current Period Subject</th>
+                            <th>Active Teacher</th>
+                            <th>Topic</th>
+                        </tr>
+                    </thead>
+                    <tbody id="liveTeacherTable">
+                        <!-- Populated by JS -->
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="card">
+                <h3><i class="fa-solid fa-calendar-days"></i> Timetable Overview</h3>
+                <div style="display: flex; gap: 15px; margin-bottom: 10px;">
+                    <button onclick="switchRoutineView('today')" class="btn" style="background:#0284c7; color:#fff;">Today's Routine</button>
+                    <button onclick="switchRoutineView('tomorrow')" class="btn" style="background:#475569; color:#fff;">Tomorrow's Routine</button>
+                </div>
+                <h4 id="routineViewTitle" style="color:#f59e0b; margin-top:10px;">Today's Schedule</h4>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Period & Time</th>
+                            <th>Subject</th>
+                            <th>Teacher</th>
+                        </tr>
+                    </thead>
+                    <tbody id="routineTableBody">
+                        <!-- Populated by JS -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Right Section: Homework & Attendance Roster -->
+        <div>
+            <div class="card">
+                <h3><i class="fa-solid fa-book"></i> Active Homework Assignments</h3>
+                <div id="homeworkList">
+                    <!-- Populated by JS -->
+                </div>
+            </div>
+
+            <div class="card">
+                <h3><i class="fa-solid fa-users"></i> Student Attendance Roster</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Student</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody id="attendanceRosterBody">
+                        <!-- Populated by JS -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+    <script>
+        // Trigger admin monitor load when on admin page
+        window.addEventListener('DOMContentLoaded', () => {
+            initAdminDashboard();
+        });
+    </script>
+</body>
+</html>

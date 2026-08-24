@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Classroom & Attendance System</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --bg-dark: #0f172a;
+            --card-bg: #1e293b;
+            --accent-green: #10b981;
+            --accent-red: #ef4444;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+        }
+
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        /* Top Navigation Header */
+        header {
+            background-color: var(--card-bg);
+            padding: 15px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 2px solid #334155;
+        }
+
+        .header-title h1 { margin: 0; font-size: 1.5rem; color: #38bdf8; }
+        .header-title p { margin: 4px 0 0 0; font-size: 0.9rem; color: var(--text-muted); }
+
+        .time-box { text-align: right; }
+        .clock-display { font-size: 1.4rem; font-weight: bold; color: #f59e0b; }
+        .day-display { font-size: 0.85rem; color: var(--text-muted); }
+
+        /* Global Marquee Alert */
+        .notice-banner {
+            background-color: #b91c1c;
+            color: #fff;
+            padding: 8px 15px;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        /* Main Dashboard Grid */
+        main {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 20px;
+            padding: 20px;
+            flex: 1;
+        }
+
+        .card {
+            background-color: var(--card-bg);
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3);
+        }
+
+        .class-selector-box {
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        select {
+            background-color: #0f172a;
+            color: white;
+            border: 1px solid #475569;
+            padding: 8px 12px;
+            border-radius: 6px;
+            font-size: 1rem;
+        }
+
+        .routine-display {
+            border-left: 4px solid #38bdf8;
+            padding-left: 15px;
+            margin-top: 15px;
+        }
+
+        .period-badge {
+            display: inline-block;
+            background-color: #0284c7;
+            padding: 4px 10px;
+            border-radius: 4px;
+            font-size: 0.85rem;
+            font-weight: bold;
+        }
+
+        .sub-alert {
+            background-color: #7c2d12;
+            border: 1px solid #ea580c;
+            color: #ffedd5;
+            padding: 10px;
+            border-radius: 6px;
+            margin-top: 15px;
+        }
+
+        .hidden { display: none !important; }
+
+        /* Buttons & Controls */
+        .btn {
+            border: none;
+            padding: 10px 16px;
+            border-radius: 6px;
+            font-weight: bold;
+            cursor: pointer;
+            color: white;
+        }
+        .btn-green { background-color: var(--accent-green); }
+        .btn-red { background-color: var(--accent-red); }
+
+        /* Scanner Preview & Attendance Log */
+        #webcamPreview {
+            width: 100%;
+            max-height: 220px;
+            background-color: #000;
+            border-radius: 6px;
+            margin-top: 10px;
+            object-fit: cover;
+        }
+
+        ul.log-list {
+            list-style: none;
+            padding: 0;
+            max-height: 250px;
+            overflow-y: auto;
+        }
+
+        ul.log-list li {
+            background-color: #0f172a;
+            padding: 10px;
+            border-radius: 6px;
+            margin-bottom: 8px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- School Header & Marquee Notice -->
+    <header>
+        <div class="header-title">
+            <h1 id="schoolName">Loading School...</h1>
+            <p id="displayClassName">Class Display Panel</p>
+        </div>
+        <div class="time-box">
+            <div id="clock" class="clock-display">00:00:00 AM</div>
+            <div id="currentDay" class="day-display">Loading Date...</div>
+        </div>
+    </header>
+
+    <div class="notice-banner">
+        <i class="fa-solid fa-bullhorn"></i>
+        <span id="globalNoticeText">Loading global notices...</span>
+    </div>
+
+    <main>
+        <!-- Left Column: Active Class & Routine -->
+        <section class="card">
+            <div class="class-selector-box">
+                <label for="classSelect"><strong>Select Classroom:</strong></label>
+                <select id="classSelect">
+                    <!-- Dynamic Options Populated by app.js -->
+                </select>
+            </div>
+
+            <div id="substitutionAlert" class="sub-alert hidden">
+                <i class="fa-solid fa-triangle-exclamation"></i>
+                <span id="subDetails">Substitution details will appear here.</span>
+            </div>
+
+            <div class="routine-display">
+                <span id="periodBadge" class="period-badge">PERIOD --</span>
+                <h2 id="currentSubject" style="margin: 10px 0 5px 0;">Loading Schedule...</h2>
+                <p id="currentTopic" style="color: var(--text-muted); margin: 0 0 15px 0;">Topic: --</p>
+                <p><strong>Assigned Teacher:</strong> <span id="teacherName">--</span></p>
+            </div>
+
+            <hr style="border-color: #334155; margin: 20px 0;">
+
+            <div>
+                <h4>Upcoming Next:</h4>
+                <p><strong id="nextSubject">--</strong> <span id="nextTeacher" style="color: var(--text-muted);"></span></p>
+            </div>
+        </section>
+
+        <!-- Right Column: Barcode Attendance & Camera -->
+        <section class="card">
+            <h3><i class="fa-solid fa-barcode"></i> Attendance Scanner</h3>
+            <p style="font-size: 0.85rem; color: var(--text-muted);">
+                Scan student ID card via camera or USB handheld scanner.
+            </p>
+
+            <button id="cameraToggleBtn" class="btn btn-green" onclick="toggleCamera()">
+                <i class="fa-solid fa-power-off"></i> Start Camera
+            </button>
+
+            <video id="webcamPreview" autoplay muted playsinline></video>
+
+            <h4 style="margin-top: 20px;">Recent Attendance Logs</h4>
+            <ul id="attendanceList" class="log-list">
+                <li class="empty-log" style="color: var(--text-muted);">No scans recorded yet.</li>
+            </ul>
+        </section>
+    </main>
+
+    <!-- Include Required ZXing Barcode Library -->
+    <script src="https://unpkg.com/@zxing/library@latest"></script>
+    <!-- Include Master JavaScript Engine -->
+    <script src="app.js"></script>
+</body>
+</html>

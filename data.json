@@ -1,0 +1,90 @@
+{
+  "schoolInfo": {
+    "name": "SOS Hermann Gmeiner Secondary School",
+    "globalNotice": "Terminal examinations schedule update: All students must bring valid ID cards for scanning."
+  },
+  "classes": [
+    { "id": "CLASS-11SCI", "name": "Class 11 - Science", "grade": 11 }
+  ],
+  "teachers": [
+    { "id": "PS", "name": "P.S.", "primarySubject": "Chemistry" },
+    { "id": "IPG", "name": "I.P.G.", "primarySubject": "Mathematics" },
+    { "id": "PB", "name": "P.B.", "primarySubject": "Chemistry" },
+    { "id": "KKC", "name": "K.K.C.", "primarySubject": "Computer Science" },
+    { "id": "KB", "name": "K.B.", "primarySubject": "Mathematics" },
+    { "id": "KK", "name": "K.K.", "primarySubject": "Nepali" },
+    { "id": "GR", "name": "G.R.", "primarySubject": "MCQ's" },
+    { "id": "RK", "name": "R.K.", "primarySubject": "Physics" },
+    { "id": "PA", "name": "P.A.", "primarySubject": "Physics" },
+    { "id": "AP", "name": "A.P.", "primarySubject": "Chemistry" },
+    { "id": "BSB", "name": "B.S.B.", "primarySubject": "English" },
+    { "id": "PKC", "name": "P.K.C.", "primarySubject": "Computer Science" },
+    { "id": "LBR", "name": "L.B.R.", "primarySubject": "Mathematics" },
+    { "id": "SRG", "name": "S.R.G.", "primarySubject": "Nepali" },
+    { "id": "PRT", "name": "P.R.T.", "primarySubject": "English" },
+    { "id": "TRS", "name": "T.R.S.", "primarySubject": "Physics" }
+  ],
+  "students": [
+    { "barcode": "STU-1001", "name": "Sushant Subedi", "classId": "CLASS-11SCI" }
+  ],
+  "routines": {
+    "CLASS-11SCI": {
+      "Monday": [
+        { "period": 1, "time": "10:15 AM - 11:00 AM", "subject": "Chemistry", "teacherId": "PS", "topic": "General Chemistry" },
+        { "period": 2, "time": "11:00 AM - 11:40 AM", "subject": "Mathematics", "teacherId": "IPG", "topic": "Algebra" },
+        { "period": 3, "time": "11:45 AM - 12:25 PM", "subject": "Chemistry", "teacherId": "PB", "topic": "Physical Chemistry" },
+        { "period": 4, "time": "12:25 PM - 1:05 PM", "subject": "Computer Science", "teacherId": "KKC", "topic": "Programming Concepts" },
+        { "period": 5, "time": "1:45 PM - 2:25 PM", "subject": "Mathematics", "teacherId": "KB", "topic": "Calculus" },
+        { "period": 6, "time": "2:25 PM - 3:05 PM", "subject": "Nepali", "teacherId": "KK", "topic": "Grammar & Literature" },
+        { "period": 7, "time": "3:10 PM - 3:50 PM", "subject": "MCQ's", "teacherId": "GR", "topic": "Entrance Practice" },
+        { "period": 8, "time": "3:50 PM - 4:30 PM", "subject": "Physics", "teacherId": "RK", "topic": "Mechanics" },
+        { "period": 9, "time": "4:30 PM - 5:10 PM", "subject": "Physics", "teacherId": "PA", "topic": "Modern Physics" }
+      ],
+      "Tuesday": [
+        { "period": 1, "time": "10:15 AM - 11:00 AM", "subject": "Practical Lab (Physics/Chemistry)", "teacherId": "AP", "topic": "Lab Experiment" },
+        { "period": 2, "time": "11:00 AM - 11:40 AM", "subject": "English", "teacherId": "BSB", "topic": "Grammar" },
+        { "period": 3, "time": "11:45 AM - 12:25 PM", "subject": "Computer Lab", "teacherId": "KKC", "topic": "Practical Lab" },
+        { "period": 4, "time": "12:25 PM - 1:05 PM", "subject": "Computer Science", "teacherId": "PKC", "topic": "Theory" },
+        { "period": 5, "time": "1:45 PM - 2:25 PM", "subject": "Mathematics", "teacherId": "LBR", "topic": "Trigonometry" },
+        { "period": 6, "time": "2:25 PM - 3:05 PM", "subject": "Nepali", "teacherId": "KK", "topic": "Composition" },
+        { "period": 7, "time": "3:10 PM - 3:50 PM", "subject": "Physics", "teacherId": "RK", "topic": "Thermodynamics" },
+        { "period": 8, "time": "3:50 PM - 4:30 PM", "subject": "Chemistry", "teacherId": "PB", "topic": "Inorganic Chemistry" },
+        { "period": 9, "time": "4:30 PM - 5:10 PM", "subject": "Chemistry", "teacherId": "AP", "topic": "Organic Chemistry" }
+      ],
+      "Wednesday": [
+        { "period": 1, "time": "10:15 AM - 11:00 AM", "subject": "Computer Science", "teacherId": "PKC", "topic": "Logic Gates & Digital Circuits" },
+        { "period": 2, "time": "11:00 AM - 11:40 AM", "subject": "Mathematics", "teacherId": "IPG", "topic": "Coordinate Geometry" },
+        { "period": 3, "time": "11:45 AM - 12:25 PM", "subject": "Chemistry", "teacherId": "PB", "topic": "Chemical Equilibrium" },
+        { "period": 4, "time": "12:25 PM - 1:05 PM", "subject": "Chemistry", "teacherId": "PS", "topic": "Reaction Kinetics" },
+        { "period": 5, "time": "1:45 PM - 2:25 PM", "subject": "Nepali", "teacherId": "SRG", "topic": "Literature" },
+        { "period": 6, "time": "2:25 PM - 3:05 PM", "subject": "Mathematics", "teacherId": "KB", "topic": "Vectors" },
+        { "period": 7, "time": "3:10 PM - 3:50 PM", "subject": "English", "teacherId": "PRT", "topic": "Writing Skills" },
+        { "period": 8, "time": "3:50 PM - 4:30 PM", "subject": "Physics", "teacherId": "RK", "topic": "Optics" },
+        { "period": 9, "time": "4:30 PM - 5:10 PM", "subject": "Physics", "teacherId": "TRS", "topic": "Electrostatics" }
+      ],
+      "Thursday": [
+        { "period": 1, "time": "10:15 AM - 11:00 AM", "subject": "Practical Lab (Chemistry/Physics)", "teacherId": "AP", "topic": "Practical Session" },
+        { "period": 2, "time": "11:00 AM - 11:40 AM", "subject": "Chemistry", "teacherId": "AP", "topic": "Stoichiometry" },
+        { "period": 3, "time": "11:45 AM - 12:25 PM", "subject": "Mathematics", "teacherId": "IPG", "topic": "Calculus II" },
+        { "period": 4, "time": "12:25 PM - 1:05 PM", "subject": "Mathematics", "teacherId": "LBR", "topic": "Statistics" },
+        { "period": 5, "time": "1:45 PM - 2:25 PM", "subject": "Computer Science", "teacherId": "KKC", "topic": "Data Structures" },
+        { "period": 6, "time": "2:25 PM - 3:05 PM", "subject": "Nepali", "teacherId": "SRG", "topic": "Grammar" },
+        { "period": 7, "time": "3:10 PM - 3:50 PM", "subject": "Physics", "teacherId": "TRS", "topic": "Waves & Acoustics" },
+        { "period": 8, "time": "3:50 PM - 4:30 PM", "subject": "English", "teacherId": "PRT", "topic": "Comprehension" },
+        { "period": 9, "time": "4:30 PM - 5:10 PM", "subject": "Physics", "teacherId": "PA", "topic": "Nuclear Physics" }
+      ],
+      "Friday": [
+        { "period": 1, "time": "10:15 AM - 11:00 AM", "subject": "Computer Science", "teacherId": "PKC", "topic": "Web Technologies" },
+        { "period": 2, "time": "11:00 AM - 11:40 AM", "subject": "Mathematics", "teacherId": "LBR", "topic": "Permutation & Combination" },
+        { "period": 3, "time": "11:45 AM - 12:25 PM", "subject": "Computer Science", "teacherId": "KKC", "topic": "Practical Lab" },
+        { "period": 4, "time": "12:25 PM - 1:05 PM", "subject": "Mathematics", "teacherId": "IPG", "topic": "Complex Numbers" },
+        { "period": 5, "time": "1:45 PM - 2:25 PM", "subject": "Physics", "teacherId": "PA", "topic": "Electromagnetism" },
+        { "period": 6, "time": "2:25 PM - 3:05 PM", "subject": "Chemistry", "teacherId": "PS", "topic": "Periodic Table" },
+        { "period": 7, "time": "3:10 PM - 3:50 PM", "subject": "Physics", "teacherId": "TRS", "topic": "Current Electricity" },
+        { "period": 8, "time": "3:50 PM - 4:30 PM", "subject": "Chemistry", "teacherId": "AP", "topic": "Organic Synthesis" },
+        { "period": 9, "time": "4:30 PM - 5:10 PM", "subject": "English", "teacherId": "BSB", "topic": "Literary Analysis" }
+      ]
+    }
+  },
+  "substitutions": []
+}
