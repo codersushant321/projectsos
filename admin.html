@@ -6,109 +6,118 @@
     <title>School Admin Monitoring Dashboard</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        :root {
-            --bg-dark: #0f172a;
-            --card-bg: #1e293b;
-            --accent-green: #10b981;
-            --accent-red: #ef4444;
-            --text-main: #f8fafc;
-            --text-muted: #94a3b8;
-        }
+       :root {
+    --bg-dark: #0f172a;
+    --card-bg: rgba(30, 41, 59, 0.85);
+    --accent-green: #10b981;
+    --accent-red: #ef4444;
+    --text-main: #f8fafc;
+    --text-muted: #cbd5e1;
+}
 
-        body {
-            margin: 0;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: var(--bg-dark);
-            color: var(--text-main);
-            padding: 20px;
-        }
+body {
+    margin: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: var(--text-main);
+    padding: 20px;
+    
+    /* SOS Gandaki Campus Background */
+    background: linear-gradient(rgba(15, 23, 42, 0.85), rgba(15, 23, 42, 0.9)), 
+                url('sos.jfif') no-repeat center center fixed;
+    background-size: cover;
+}
 
-        header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-bottom: 2px solid #334155;
-            padding-bottom: 15px;
-            margin-bottom: 20px;
-        }
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 2px solid rgba(51, 65, 85, 0.7);
+    padding-bottom: 15px;
+    margin-bottom: 20px;
+    background: rgba(30, 41, 59, 0.8);
+    backdrop-filter: blur(8px);
+    padding: 15px;
+    border-radius: 10px;
+}
 
-        /* School Active Status Light Indicator */
-        .school-status-box {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            font-size: 1.1rem;
-            font-weight: bold;
-        }
+.school-status-box {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 1.1rem;
+    font-weight: bold;
+}
 
-        .status-light {
-            width: 14px;
-            height: 14px;
-            border-radius: 50%;
-            display: inline-block;
-            box-shadow: 0 0 10px rgba(0,0,0,0.5);
-        }
+.status-light {
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    display: inline-block;
+    box-shadow: 0 0 10px rgba(0,0,0,0.5);
+}
 
-        .status-on { background-color: var(--accent-green); box-shadow: 0 0 10px var(--accent-green); }
-        .status-off { background-color: var(--accent-red); box-shadow: 0 0 10px var(--accent-red); }
+.status-on { background-color: var(--accent-green); box-shadow: 0 0 10px var(--accent-green); }
+.status-off { background-color: var(--accent-red); box-shadow: 0 0 10px var(--accent-red); }
 
-        /* KPI Cards Grid */
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 15px;
-            margin-bottom: 25px;
-        }
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 15px;
+    margin-bottom: 25px;
+}
 
-        .stat-card {
-            background-color: var(--card-bg);
-            padding: 20px;
-            border-radius: 10px;
-            text-align: center;
-        }
+.stat-card {
+    background: var(--card-bg);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+}
 
-        .stat-card h3 { margin: 0; font-size: 2rem; color: #38bdf8; }
-        .stat-card p { margin: 5px 0 0 0; color: var(--text-muted); font-size: 0.9rem; }
+.stat-card h3 { margin: 0; font-size: 2rem; color: #38bdf8; }
+.stat-card p { margin: 5px 0 0 0; color: var(--text-muted); font-size: 0.9rem; }
 
-        /* Main Content Grid */
-        .dashboard-grid {
-            display: grid;
-            grid-template-columns: 2fr 1fr;
-            gap: 20px;
-        }
+.dashboard-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 20px;
+}
 
-        .card {
-            background-color: var(--card-bg);
-            border-radius: 10px;
-            padding: 20px;
-            margin-bottom: 20px;
-        }
+.card {
+    background: var(--card-bg);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    padding: 20px;
+    margin-bottom: 20px;
+}
 
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 10px;
-        }
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+}
 
-        th, td {
-            padding: 12px;
-            text-align: left;
-            border-bottom: 1px solid #334155;
-        }
+th, td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid rgba(51, 65, 85, 0.6);
+}
 
-        th { background-color: #0f172a; color: #38bdf8; }
+th { background-color: rgba(15, 23, 42, 0.8); color: #38bdf8; }
 
-        .badge-present { color: var(--accent-green); font-weight: bold; }
-        .badge-absent { color: var(--accent-red); font-weight: bold; }
+.badge-present { color: var(--accent-green); font-weight: bold; }
+.badge-absent { color: var(--accent-red); font-weight: bold; }
 
-        .homework-item {
-            background-color: #0f172a;
-            padding: 12px;
-            border-radius: 6px;
-            margin-bottom: 10px;
-            border-left: 4px solid #f59e0b;
-        }
-    </style>
+.homework-item {
+    background-color: rgba(15, 23, 42, 0.8);
+    padding: 12px;
+    border-radius: 6px;
+    margin-bottom: 10px;
+    border-left: 4px solid #f59e0b;
+}
+        </style>
 </head>
 <body>
 
